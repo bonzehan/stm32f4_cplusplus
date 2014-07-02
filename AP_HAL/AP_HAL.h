@@ -6,11 +6,9 @@
 #include <stdbool.h>
 
 #include "AP_HAL_Namespace.h"
-#include "AP_HAL_Boards.h"
 
 /* HAL Module Classes (all pure virtual) */
 #include "GPIO.h"
-#include "Scheduler.h"
 
 /* HAL Class definition */
 #include "HAL.h"

@@ -43,7 +43,7 @@ GPIO_InitTypeDef  GPIO_InitStructure;
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint32_t delay_cnt = 200;
-const AP_HAL::HAL& hal = AP_HAL_BOARD_DRIVER;
+const AP_HAL::HAL& hal = AP_HAL_STM32F4;
 /* Private function prototypes -----------------------------------------------*/
 void Delay(__IO uint32_t nCount);
 void ChangeDelay(void);
@@ -69,6 +69,7 @@ int main(void)
 		  system_stm32f4xx.c file
 		 */
 		Stm32f4BspInit();
+		systickConfig();
 		hal.init(0, NULL);
 
 		led_io_0.mode(1);
@@ -80,7 +81,7 @@ int main(void)
 		bspITAttach(4, EXTI_Trigger_Falling, Stm32f4BspReboot); 
 
 		BSP_ENTER_CRITICAL();
-		hal.scheduler->delay(1);
+		systickDelay_ms(1);
 		BSP_EXIT_CRITICAL();
 
 

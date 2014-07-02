@@ -46,7 +46,6 @@ CXXSRC += LibraryHacks.cpp
 CXXSRC += main.cpp
 CXXSRC += digiio.cpp
 CXXSRC += GPIO.cpp
-CXXSRC += Scheduler.cpp
 CXXSRC += HAL_STM32F4_Class.cpp
 
 ARCHFLAGS = -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard 
