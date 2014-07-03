@@ -14,7 +14,6 @@ INCLUDE=-I$(CURDIR)/inc
 INCLUDE+=-I$(STMLIB)/CMSIS/Include
 INCLUDE+=-I$(STMLIB)/CMSIS/ST/STM32F4xx/Include
 INCLUDE+=-I$(STD_PERIPH)/inc
-INCLUDE += -I$(CURDIR)/AP_HAL
 INCLUDE += -I$(CURDIR)/AP_HAL_STM32F4
 
 # vpath is used so object files are written to the current directory instead

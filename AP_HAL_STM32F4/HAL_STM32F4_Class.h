@@ -1,14 +1,14 @@
 #ifndef __AP_HAL_STM32F4_CLASS_H__
 #define __AP_HAL_STM32F4_CLASS_H__
 
-#include <AP_HAL.h>
+#include "GPIO.h"
 
-#include "AP_HAL_STM32F4_Namespace.h"
-
-class HAL_STM32F4 : public AP_HAL::HAL {
+class HAL_STM32F4{
 public:
     HAL_STM32F4();
     void init(int argc, char * const * argv) const;
+
+	STM32F4GPIO *_gpio_driver;
 };
 
 extern const HAL_STM32F4 AP_HAL_STM32F4;

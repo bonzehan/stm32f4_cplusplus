@@ -1,9 +1,5 @@
-#include "AP_HAL.h"
-
 #include "GPIO.h"
 #include "stm32f4bsp.h"
-
-using namespace AP_HAL_STM32F4_NS;
 
 STM32F4GPIO::STM32F4GPIO()
 {}
@@ -41,7 +37,7 @@ void STM32F4GPIO::toggle(uint8_t pin)
 }
 
 /* Alternative interface: */
-AP_HAL::DigitalSource* STM32F4GPIO::channel(uint16_t n) {
+STM32F4DigitalSource* STM32F4GPIO::channel(uint16_t n) {
 		if(n >= BSP_GPIO_PIN_NUM)
 				return NULL;
 		return new STM32F4DigitalSource(n);

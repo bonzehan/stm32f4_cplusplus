@@ -1,22 +1,9 @@
-#ifndef __AP_HAL_STM32F4_GPIO_H__
-#define __AP_HAL_STM32F4_GPIO_H__
+#ifndef _GPIO_H_
+#define _GPIO_H_
 
-#include "AP_HAL_STM32F4.h"
+#include <stdint.h>
 
-class AP_HAL_STM32F4_NS::STM32F4GPIO : public AP_HAL::GPIO {
-public:
-    STM32F4GPIO();
-    void    init();
-    void    pinMode(uint8_t pin, uint8_t output);
-    uint8_t read(uint8_t pin);
-    void    write(uint8_t pin, uint8_t value);
-    void    toggle(uint8_t pin);
-
-    /* Alternative interface: */
-    AP_HAL::DigitalSource* channel(uint16_t n);
-};
-
-class AP_HAL_STM32F4_NS::STM32F4DigitalSource : public AP_HAL::DigitalSource {
+class STM32F4DigitalSource{
 public:
     STM32F4DigitalSource(uint8_t pin_num) : _pin_num(pin_num)
 		{}
@@ -29,4 +16,18 @@ private:
     uint8_t _pin_num;
 };
 
-#endif // __AP_HAL_STM32F4_GPIO_H__
+class STM32F4GPIO{
+public:
+    STM32F4GPIO();
+    void    init();
+    void    pinMode(uint8_t pin, uint8_t output);
+    uint8_t read(uint8_t pin);
+    void    write(uint8_t pin, uint8_t value);
+    void    toggle(uint8_t pin);
+
+    /* Alternative interface: */
+    STM32F4DigitalSource* channel(uint16_t n);
+};
+
+
+#endif

@@ -20,8 +20,7 @@
  */ 
 
 /* Includes ------------------------------------------------------------------*/
-#include "AP_HAL.h"
-#include "AP_HAL_STM32F4.h"
+#include "HAL_STM32F4_Class.h"
 #include "stm32f4xx.h"
 #include "stm32f4bsp.h"
 #include "testclass.h"
@@ -43,7 +42,7 @@ GPIO_InitTypeDef  GPIO_InitStructure;
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint32_t delay_cnt = 200;
-const AP_HAL::HAL& hal = AP_HAL_STM32F4;
+const HAL_STM32F4& hal = AP_HAL_STM32F4;
 /* Private function prototypes -----------------------------------------------*/
 void Delay(__IO uint32_t nCount);
 void ChangeDelay(void);
@@ -57,7 +56,6 @@ void ChangeDelay(void);
 int main(void)
 {
 		Person* p = new Person();
-		DigitalSource led_io_0(0);
 		DigitalSource led_io_1(1);
 		DigitalSource led_io_2(2);
 		DigitalSource led_io_3(3);
@@ -71,8 +69,8 @@ int main(void)
 		Stm32f4BspInit();
 		systickConfig();
 		hal.init(0, NULL);
+		hal._gpio_driver->pinMode(0,1);
 
-		led_io_0.mode(1);
 		led_io_1.mode(1);
 		led_io_2.mode(1);
 		led_io_3.mode(1);
@@ -88,7 +86,7 @@ int main(void)
 		while (1)
 		{
 				/* PD12 to be toggled */
-				led_io_0.write(1);
+				hal._gpio_driver->write(0,1);
 
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
@@ -111,7 +109,7 @@ int main(void)
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
 
-				led_io_0.write(0);
+				hal._gpio_driver->write(0,0);
 				led_io_1.write(0);
 				led_io_2.write(0);
 				led_io_3.write(0);

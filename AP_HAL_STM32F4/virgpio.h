@@ -1,10 +1,5 @@
-
-#ifndef __AP_HAL_GPIO_H__
-#define __AP_HAL_GPIO_H__
-
-#include <stdint.h>
-
-#include "AP_HAL_Namespace.h"
+#ifndef _VIRGPIO_H_
+#define _VIRGPIO_H_
 
 #define GPIO_INPUT  0
 #define GPIO_OUTPUT 1
@@ -13,7 +8,7 @@
 #define GPIO_INTERRUPT_FALLING 2
 #define GPIO_INTERRUPT_RISING 3
 
-class AP_HAL::DigitalSource {
+class VirtualDigitalSource {
 public:
     virtual void    mode(uint8_t output) = 0;
     virtual uint8_t read() = 0;
@@ -21,9 +16,9 @@ public:
     virtual void    toggle() = 0;
 };
 
-class AP_HAL::GPIO {
+class VirtualGPIO {
 public:
-    GPIO() {}
+    VirtualGPIO(void) {}
     virtual void    init() = 0;
     virtual void    pinMode(uint8_t pin, uint8_t output) = 0;
     virtual uint8_t read(uint8_t pin) = 0;
@@ -31,7 +26,8 @@ public:
     virtual void    toggle(uint8_t pin) = 0;
 
     /* Alternative interface: */
-    virtual AP_HAL::DigitalSource* channel(uint16_t n) = 0;
+    virtual VirtualDigitalSource* channel(uint16_t n) = 0;
 };
 
-#endif // __AP_HAL_GPIO_H__
+#endif
+
