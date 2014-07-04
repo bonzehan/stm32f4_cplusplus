@@ -21,10 +21,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "HAL_STM32F4_Class.h"
+#include "GPIO.h"
 #include "stm32f4xx.h"
 #include "stm32f4bsp.h"
-#include "testclass.h"
-#include "digiio.h"
 #include <stdio.h>
 
 /** @addtogroup STM32F4_Discovery_Peripheral_Examples
@@ -35,14 +34,8 @@
  * @{
  */ 
 
-/* Private typedef -----------------------------------------------------------*/
-GPIO_InitTypeDef  GPIO_InitStructure;
-
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
 uint32_t delay_cnt = 200;
-const HAL_STM32F4& hal = AP_HAL_STM32F4;
+//STM32F4GPIO& hal = g_STM32F4GPIO;
 /* Private function prototypes -----------------------------------------------*/
 void Delay(__IO uint32_t nCount);
 void ChangeDelay(void);
@@ -55,11 +48,11 @@ void ChangeDelay(void);
  */
 int main(void)
 {
-		Person* p = new Person();
-		DigitalSource led_io_1(1);
-		DigitalSource led_io_2(2);
-		DigitalSource led_io_3(3);
-		int a=100;
+		//gpio_driver.pinMode(0,1);
+//		STM32F4GPIO loc_io;
+//		HAL_STM32F4 hal;
+		STM32F4GPIO gpio_driver;
+//		int a=100;
 		/*!< At this stage the microcontroller clock setting is already configured, 
 		  this is done through SystemInit() function which is called from startup
 		  file (startup_stm32f4xx.s) before to branch to application main.
@@ -68,14 +61,17 @@ int main(void)
 		 */
 		Stm32f4BspInit();
 		systickConfig();
-		hal.init(0, NULL);
-		hal._gpio_driver->pinMode(0,1);
+//		loc_io.pinMode(0,1);
+//		g_STM32F4GPIO.pinMode(0,1);
+		//hal.pinMode(0,1);
+		//hal.init();
+//		hal.p_gpio_driver->pinMode(0,1);
+		gpio_driver.pinMode(0,1);
+		gpio_driver.pinMode(1,1);
+		gpio_driver.pinMode(2,1);
+		gpio_driver.pinMode(3,1);
 
-		led_io_1.mode(1);
-		led_io_2.mode(1);
-		led_io_3.mode(1);
 		bspPinMode(4, 0);
-
 		bspITAttach(4, EXTI_Trigger_Falling, Stm32f4BspReboot); 
 
 		BSP_ENTER_CRITICAL();
@@ -85,40 +81,48 @@ int main(void)
 
 		while (1)
 		{
+		//		ITM_SendChar(0x42);
+		//		printf("the final answer is %d\n",42);
 				/* PD12 to be toggled */
-				hal._gpio_driver->write(0,1);
+//				hal.p_gpio_driver->write(0,1);
+//				loc_io.write(0,1);
+//				g_STM32F4GPIO.write(0,1);
+				gpio_driver.write(0,1);
 
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
 
 				/* PD13 to be toggled */
-				led_io_1.write(1);
+				gpio_driver.write(1,1);
 
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
 
 				/* PD14 to be toggled */
-				led_io_2.write(1);
+				gpio_driver.write(2,1);
 
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
 
 				/* PD15 to be toggled */
-				led_io_3.write(1);
+				gpio_driver.write(3,1);
 
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
 
-				hal._gpio_driver->write(0,0);
-				led_io_1.write(0);
-				led_io_2.write(0);
-				led_io_3.write(0);
+//				hal.p_gpio_driver->write(0,0);
+//				loc_io.write(0,0);
+//				g_STM32F4GPIO.write(0,0);
+				gpio_driver.write(0,0);
+				gpio_driver.write(1,0);
+				gpio_driver.write(2,0);
+				gpio_driver.write(3,0);
 
 				/* Insert delay */
 				systickDelay_ms(1000);
 				//ChangeDelay();
-				p->Add(delay_cnt,a);
-				delay_cnt = p->Result();
+//				p->Add(delay_cnt,a);
+//				delay_cnt = p->Result();
 		}
 }
 

@@ -38,12 +38,11 @@ CSRC+=stm32f4xx_rcc.c \
 		stm32f4xx_gpio.c \
 		stm32f4xx_exti.c \
 		stm32f4xx_syscfg.c \
-		stm32f4xx_iwdg.c
+		stm32f4xx_iwdg.c \
+		syscalls.c
 
-CXXSRC = testclass.cpp 
-CXXSRC += LibraryHacks.cpp
+CXXSRC = LibraryHacks.cpp
 CXXSRC += main.cpp
-CXXSRC += digiio.cpp
 CXXSRC += GPIO.cpp
 CXXSRC += HAL_STM32F4_Class.cpp
 

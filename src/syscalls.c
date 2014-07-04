@@ -12,6 +12,8 @@
 #include <sys/times.h>
 #include <sys/unistd.h>
 #include "stm32f4xx.h"
+#include "stlinky.h"
+#include <string.h>
 
 #undef errno
 extern int errno;
@@ -24,8 +26,14 @@ extern int errno;
 char *__env[1] = { 0 };
 char **environ = __env;
 
-
 int _write(int file, char *ptr, int len);
+
+volatile struct stlinky g_stlinky_term = {
+		.magic = STLINKY_MAGIC,
+		.bufsize = CONFIG_LIB_STLINKY_BSIZE,
+		.txsize = 0,
+		.rxsize = 0
+};
 
 #pragma weak __io_putchar /**< Defines following __io_putchar() as weak, it will only be used, if there is not other implementation (e.g. lcd-log) */
 
@@ -36,36 +44,10 @@ int _write(int file, char *ptr, int len);
  */
 int __io_putchar(int ch)
 {
-//		static int USART_ready = 0;
-//		static USART_InitTypeDef USART_InitStructure;
-//
-//		if (USART_ready != 1)
-//		{
-//				// Init USART 3
-//				USART_InitStructure.USART_BaudRate = 19200;
-//				USART_InitStructure.USART_WordLength = USART_WordLength_8b;
-//				USART_InitStructure.USART_StopBits = USART_StopBits_1;
-//				USART_InitStructure.USART_Parity = USART_Parity_No;
-//				USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
-//				USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
-//
-////				STM_EVAL_COMInit(COM1, &USART_InitStructure);
-//
-//				// Set ready flag
-//				USART_ready = 1;
-//		}
-//
-//		/* Place your implementation of fputc here */
-//		/* e.g. write a character to the USART */
-////		USART_SendData(EVAL_COM1, (uint8_t) ch);
-//
-//		/* Loop until the end of transmission */
-////		while(USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TC) == RESET)
-////		{
-////		}
-
-		return ch;
+		return ITM_SendChar(ch);
 }
+
+
 
 void _exit(int status)
 {
@@ -128,6 +110,8 @@ int _getpid()
  */
 int _isatty(int file)
 {
+
+
 		switch (file)
 		{
 				case STDOUT_FILENO:
@@ -170,69 +154,6 @@ int _lseek(int file, int ptr, int dir)
 		return 0;
 }
 
-/*
-   sbrk
-   Increase program data space.
-   Malloc and related functions depend on this
- */
-caddr_t _sbrk(int incr)
-{
-
-
-		extern char _ebss; // Defined by the linker
-		static char *heap_end;
-		char *prev_heap_end;
-
-		if (heap_end == 0)
-		{
-				heap_end = &_ebss;
-		}
-		prev_heap_end = heap_end;
-
-		char * stack = (char*) __get_MSP();
-		if (heap_end + incr > stack)
-		{
-				_write(STDERR_FILENO, "Heap and stack collision\n", 25);
-				errno = ENOMEM;
-				return (caddr_t) -1;
-				//abort ();
-		}
-
-		heap_end += incr;
-		return (caddr_t) prev_heap_end;
-
-}
-
-/*
-   read
-   Read a character to a file. `libc' subroutines will use this system routine for input from all files, including stdin
-   Returns -1 on error or blocks until the number of characters have been read.
- */
-int _read(int file, char *ptr, int len)
-{
-		int n;
-		int num = 0;
-		switch (file)
-		{
-				case STDIN_FILENO:
-						for (n = 0; n < len; n++)
-						{
-								while ((USART3->SR & USART_FLAG_RXNE) == (uint16_t) RESET)
-								{
-								}
-								char c = (char) (USART3->DR & (uint16_t) 0x01FF);
-								*ptr++ = c;
-								num++;
-						}
-						break;
-
-
-				default:
-						errno = EBADF;
-						return -1;
-		}
-		return num;
-}
 
 /*
    stat
@@ -274,7 +195,50 @@ int _wait(int *status)
 		return -1;
 }
 
+int stlinky_tx(volatile struct stlinky* st, const char* buf, int siz)
+{
+		int sz = min_t(int, CONFIG_LIB_STLINKY_BSIZE, siz);
+		while(st->txsize != 0);;; 
+		memcpy((char*) st->txbuf, buf, sz);
+		st->txsize = (unsigned char) sz;
+		return sz;
+}
 
+/* TODO: We loose data here if we read less than avaliable */ 
+int stlinky_rx(volatile struct stlinky* st, char* buf, int siz)
+{
+		int ret;
+		while(st->rxsize == 0);;; 
+		int sz = min_t(int, (int) st->rxsize, siz);
+		memcpy(buf, (char*) st->rxbuf, sz);
+		ret = (int) (st->rxsize);
+		st->rxsize = 0;
+		return ret;
+}
+
+int stlinky_avail(volatile struct stlinky* st)
+{
+		return st->rxsize;
+}
+
+void stlinky_wait_for_terminal(volatile struct stlinky* st)
+{
+		st->txbuf[0]='\n';
+		st->txsize=1;
+		while(st->txsize != 0);;; 
+}
+
+#ifdef CONFIG_LIB_STLINKY_NLIB
+
+int _write(int file, char *ptr, int len) {
+		return stlinky_tx(&g_stlinky_term, ptr, len);
+}
+
+int _read(int file, char *ptr, int len) {
+		return stlinky_rx(&g_stlinky_term, ptr, len);
+}
+
+#else
 /*
    write
    Write a character to a file. `libc' subroutines will use this system routine for output to all files, including stdout
@@ -304,3 +268,24 @@ int _write(int file, char *ptr, int len)
 		}
 		return len;
 }
+
+/*
+   read
+   Read a character to a file. `libc' subroutines will use this system routine for input from all files, including stdin
+   Returns -1 on error or blocks until the number of characters have been read.
+ */
+int _read(int file, char *ptr, int len)
+{
+		int num = 0;
+		switch (file)
+		{
+				case STDIN_FILENO:
+						break;
+				default:
+						errno = EBADF;
+						return -1;
+		}
+		return num;
+}
+
+#endif

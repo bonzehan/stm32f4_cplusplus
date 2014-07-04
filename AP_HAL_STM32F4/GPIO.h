@@ -2,8 +2,9 @@
 #define _GPIO_H_
 
 #include <stdint.h>
+#include "virgpio.h"
 
-class STM32F4DigitalSource{
+class STM32F4DigitalSource : public VirtualDigitalSource{
 public:
     STM32F4DigitalSource(uint8_t pin_num) : _pin_num(pin_num)
 		{}
@@ -16,7 +17,8 @@ private:
     uint8_t _pin_num;
 };
 
-class STM32F4GPIO{
+class STM32F4GPIO : public VirtualGPIO
+{
 public:
     STM32F4GPIO();
     void    init();
@@ -26,8 +28,7 @@ public:
     void    toggle(uint8_t pin);
 
     /* Alternative interface: */
-    STM32F4DigitalSource* channel(uint16_t n);
+    VirtualDigitalSource* channel(uint16_t n);
 };
-
 
 #endif

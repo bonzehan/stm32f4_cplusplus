@@ -8,6 +8,8 @@
 #define GPIO_INTERRUPT_FALLING 2
 #define GPIO_INTERRUPT_RISING 3
 
+#include <stdint.h>
+
 class VirtualDigitalSource {
 public:
     virtual void    mode(uint8_t output) = 0;

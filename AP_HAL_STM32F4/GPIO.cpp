@@ -2,7 +2,8 @@
 #include "stm32f4bsp.h"
 
 STM32F4GPIO::STM32F4GPIO()
-{}
+{
+}
 
 void STM32F4GPIO::init()
 {}
@@ -37,7 +38,7 @@ void STM32F4GPIO::toggle(uint8_t pin)
 }
 
 /* Alternative interface: */
-STM32F4DigitalSource* STM32F4GPIO::channel(uint16_t n) {
+VirtualDigitalSource* STM32F4GPIO::channel(uint16_t n) {
 		if(n >= BSP_GPIO_PIN_NUM)
 				return NULL;
 		return new STM32F4DigitalSource(n);

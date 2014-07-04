@@ -582,9 +582,7 @@ APP_Rx_ptr_out	Libraries/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.c	
 APSR_Type	Libraries/CMSIS/Include/core_cm0.h	/^} APSR_Type;$/;"	t	typeref:union:__anon53
 APSR_Type	Libraries/CMSIS/Include/core_cm3.h	/^} APSR_Type;$/;"	t	typeref:union:__anon64
 APSR_Type	Libraries/CMSIS/Include/core_cm4.h	/^} APSR_Type;$/;"	t	typeref:union:__anon80
-AP_HAL	AP_HAL/AP_HAL_Namespace.h	/^namespace AP_HAL {$/;"	n
 AP_HAL_STM32F4	AP_HAL_STM32F4/HAL_STM32F4_Class.cpp	/^const HAL_STM32F4 AP_HAL_STM32F4;$/;"	v
-AP_HAL_STM32F4_NS	AP_HAL_STM32F4/AP_HAL_STM32F4_Namespace.h	/^namespace AP_HAL_STM32F4_NS {$/;"	n
 AR	Makefile	/^AR=$(TOOLCHAIN_PATH)\/$(TOOLCHAIN_PREFIX)-ar$/;"	m
 ARCHFLAGS	Makefile	/^ARCHFLAGS = -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard $/;"	m
 ARG	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	/^  __IO uint32_t ARG;            \/*!< SDIO argument register,         Address offset: 0x08 *\/$/;"	m	struct:__anon127
@@ -3618,7 +3616,6 @@ DeviceSpeedDetected	Libraries/STM32_USB_HOST_Library/Core/inc/usbh_core.h	/^  vo
 DeviceState	Libraries/STM32_USB_Device_Library/Class/dfu/src/usbd_dfu_core.c	/^uint8_t DeviceState;$/;"	v
 DeviceStatus	Libraries/STM32_USB_Device_Library/Class/dfu/src/usbd_dfu_core.c	/^uint8_t DeviceStatus[6];$/;"	v
 DeviceSuspended	Libraries/STM32_USB_OTG_Driver/inc/usb_core.h	/^  void (*DeviceSuspended)(void);$/;"	m	struct:_USBD_USR_PROP
-DigitalSource	AP_HAL/GPIO.h	/^class AP_HAL::DigitalSource {$/;"	c	class:AP_HAL
 DigitalSource	inc/digiio.h	/^		DigitalSource(uint8_t pin_num) : _pin_num(pin_num)$/;"	f	class:DigitalSource
 DigitalSource	inc/digiio.h	/^class DigitalSource{$/;"	c
 DisconnHandled	Libraries/STM32_USB_OTG_Driver/inc/usb_core.h	/^  uint8_t DisconnHandled;$/;"	m	struct:USB_OTG_hPort
@@ -5301,8 +5298,6 @@ GINTMSK	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^  __IO uint32_t GINTMSK;
 GINTSTS	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^  __IO uint32_t GINTSTS;      \/* Core Interrupt Register            014h*\/$/;"	m	struct:_USB_OTG_GREGS
 GOTGCTL	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^  __IO uint32_t GOTGCTL;      \/* USB_OTG Control and Status Register    000h*\/$/;"	m	struct:_USB_OTG_GREGS
 GOTGINT	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^  __IO uint32_t GOTGINT;      \/* USB_OTG Interrupt Register             004h*\/$/;"	m	struct:_USB_OTG_GREGS
-GPIO	AP_HAL/GPIO.h	/^    GPIO() {}$/;"	f	class:AP_HAL::GPIO
-GPIO	AP_HAL/GPIO.h	/^class AP_HAL::GPIO {$/;"	c	class:AP_HAL
 GPIOA	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	1181;"	d
 GPIOA_BASE	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	1080;"	d
 GPIOB	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	1182;"	d
@@ -5417,11 +5412,11 @@ GPIO_IDR_IDR_6	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	4467;"	d
 GPIO_IDR_IDR_7	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	4468;"	d
 GPIO_IDR_IDR_8	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	4469;"	d
 GPIO_IDR_IDR_9	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	4470;"	d
-GPIO_INPUT	AP_HAL/GPIO.h	9;"	d
-GPIO_INTERRUPT_FALLING	AP_HAL/GPIO.h	13;"	d
-GPIO_INTERRUPT_HIGH	AP_HAL/GPIO.h	12;"	d
-GPIO_INTERRUPT_LOW	AP_HAL/GPIO.h	11;"	d
-GPIO_INTERRUPT_RISING	AP_HAL/GPIO.h	14;"	d
+GPIO_INPUT	AP_HAL_STM32F4/virgpio.h	4;"	d
+GPIO_INTERRUPT_FALLING	AP_HAL_STM32F4/virgpio.h	8;"	d
+GPIO_INTERRUPT_HIGH	AP_HAL_STM32F4/virgpio.h	7;"	d
+GPIO_INTERRUPT_LOW	AP_HAL_STM32F4/virgpio.h	6;"	d
+GPIO_INTERRUPT_RISING	AP_HAL_STM32F4/virgpio.h	9;"	d
 GPIO_Init	Libraries/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.c	/^void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)$/;"	f
 GPIO_InitStructure	src/main.cpp	/^GPIO_InitTypeDef  GPIO_InitStructure;$/;"	v
 GPIO_InitTypeDef	Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_gpio.h	/^}GPIO_InitTypeDef;$/;"	t	typeref:struct:__anon165
@@ -5594,7 +5589,7 @@ GPIO_OTYPER_OT_9	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	4322;"	d
 GPIO_OType	Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_gpio.h	/^  GPIOOType_TypeDef GPIO_OType;   \/*!< Specifies the operating output type for the selected pins.$/;"	m	struct:__anon165
 GPIO_OType_OD	Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_gpio.h	/^  GPIO_OType_OD = 0x01$/;"	e	enum:__anon161
 GPIO_OType_PP	Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_gpio.h	/^  GPIO_OType_PP = 0x00,$/;"	e	enum:__anon161
-GPIO_OUTPUT	AP_HAL/GPIO.h	10;"	d
+GPIO_OUTPUT	AP_HAL_STM32F4/virgpio.h	5;"	d
 GPIO_PUPDR_PUPDR0	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	4396;"	d
 GPIO_PUPDR_PUPDR0_0	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	4397;"	d
 GPIO_PUPDR_PUPDR0_1	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	4398;"	d
@@ -5726,10 +5721,8 @@ GetState	Libraries/STM32_USB_Device_Library/Class/audio/src/usbd_audio_out_if.c	
 GetUsrStrDescriptor	Libraries/STM32_USB_OTG_Driver/inc/usb_core.h	/^  uint8_t  *(*GetUsrStrDescriptor)( uint8_t speed ,uint8_t index,  uint16_t *length);   $/;"	m	struct:_Device_cb
 HAINT	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^  __IO uint32_t HAINT;   \/* Host All Channels Interrupt Register 414h*\/$/;"	m	struct:_USB_OTG_HREGS
 HAINTMSK	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^  __IO uint32_t HAINTMSK;   \/* Host All Channels Interrupt Mask 418h*\/$/;"	m	struct:_USB_OTG_HREGS
-HAL	AP_HAL/HAL.h	/^    HAL(AP_HAL::GPIO*       _gpio)$/;"	f	class:AP_HAL::HAL
-HAL	AP_HAL/HAL.h	/^class AP_HAL::HAL {$/;"	c	class:AP_HAL
-HAL_STM32F4	AP_HAL_STM32F4/HAL_STM32F4_Class.cpp	/^HAL_STM32F4::HAL_STM32F4() :$/;"	f	class:HAL_STM32F4
-HAL_STM32F4	AP_HAL_STM32F4/HAL_STM32F4_Class.h	/^class HAL_STM32F4 : public AP_HAL::HAL {$/;"	c
+HAL_STM32F4	AP_HAL_STM32F4/HAL_STM32F4_Class.cpp	/^HAL_STM32F4::HAL_STM32F4() : _gpio_driver(&gpioDriver)$/;"	f	class:HAL_STM32F4
+HAL_STM32F4	AP_HAL_STM32F4/HAL_STM32F4_Class.h	/^class HAL_STM32F4{$/;"	c
 HARDWARE_ERROR	Libraries/STM32_USB_Device_Library/Class/msc/inc/usbd_msc_scsi.h	79;"	d
 HASH	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	1214;"	d
 HASH_AlgoMode	Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_hash.h	/^  uint32_t HASH_AlgoMode;      \/*!< HASH or HMAC. This parameter can be a value $/;"	m	struct:__anon166
@@ -9954,10 +9947,10 @@ STA_PROTECT	Utilities/Third_Party/fat_fs/inc/diskio.h	44;"	d
 STD_PERIPH	Makefile	/^STD_PERIPH:=$(STMLIB)\/STM32F4xx_StdPeriph_Driver$/;"	m
 STIR	Libraries/CMSIS/Include/core_cm3.h	/^  __O  uint32_t STIR;                    \/*!< Offset: 0xE00 ( \/W)  Software Trigger Interrupt Register     *\/$/;"	m	struct:__anon72
 STIR	Libraries/CMSIS/Include/core_cm4.h	/^  __O  uint32_t STIR;                    \/*!< Offset: 0xE00 ( \/W)  Software Trigger Interrupt Register     *\/$/;"	m	struct:__anon88
-STM32F4DigitalSource	AP_HAL_STM32F4/GPIO.h	/^    STM32F4DigitalSource(uint8_t pin_num) : _pin_num(pin_num)$/;"	f	class:AP_HAL_STM32F4_NS::STM32F4DigitalSource
-STM32F4DigitalSource	AP_HAL_STM32F4/GPIO.h	/^class AP_HAL_STM32F4_NS::STM32F4DigitalSource : public AP_HAL::DigitalSource {$/;"	c	class:AP_HAL_STM32F4_NS
+STM32F4DigitalSource	AP_HAL_STM32F4/GPIO.h	/^    STM32F4DigitalSource(uint8_t pin_num) : _pin_num(pin_num)$/;"	f	class:STM32F4DigitalSource
+STM32F4DigitalSource	AP_HAL_STM32F4/GPIO.h	/^class STM32F4DigitalSource{$/;"	c
 STM32F4GPIO	AP_HAL_STM32F4/GPIO.cpp	/^STM32F4GPIO::STM32F4GPIO()$/;"	f	class:STM32F4GPIO
-STM32F4GPIO	AP_HAL_STM32F4/GPIO.h	/^class AP_HAL_STM32F4_NS::STM32F4GPIO : public AP_HAL::GPIO {$/;"	c	class:AP_HAL_STM32F4_NS
+STM32F4GPIO	AP_HAL_STM32F4/GPIO.h	/^class STM32F4GPIO{$/;"	c
 STM32F4XX	Libraries/CMSIS/ST/STM32F4xx/Include/stm32f4xx.h	63;"	d
 STM32_USBO_OTG_ISR_Handler	Libraries/STM32_USB_OTG_Driver/src/usb_otg.c	/^uint32_t STM32_USBO_OTG_ISR_Handler(USB_OTG_CORE_HANDLE *pdev)$/;"	f
 STMLIB	Makefile	/^STMLIB:=$(CURDIR)\/Libraries$/;"	m
@@ -12007,6 +12000,9 @@ VOLUME_OVERFLOW	Libraries/STM32_USB_Device_Library/Class/msc/inc/usbd_msc_scsi.h
 VTOR	Libraries/CMSIS/Include/core_cm3.h	/^  __IO uint32_t VTOR;                    \/*!< Offset: 0x008 (R\/W)  Vector Table Offset Register                          *\/$/;"	m	struct:__anon73
 VTOR	Libraries/CMSIS/Include/core_cm4.h	/^  __IO uint32_t VTOR;                    \/*!< Offset: 0x008 (R\/W)  Vector Table Offset Register                          *\/$/;"	m	struct:__anon89
 ValBit	Libraries/STM32_USB_HOST_Library/Core/inc/usbh_def.h	50;"	d
+VirtualDigitalSource	AP_HAL_STM32F4/virgpio.h	/^class VirtualDigitalSource {$/;"	c
+VirtualGPIO	AP_HAL_STM32F4/virgpio.h	/^    VirtualGPIO(void) {}$/;"	f	class:VirtualGPIO
+VirtualGPIO	AP_HAL_STM32F4/virgpio.h	/^class VirtualGPIO {$/;"	c
 VoltageRange_1	Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_flash.h	91;"	d
 VoltageRange_2	Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_flash.h	92;"	d
 VoltageRange_3	Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_flash.h	93;"	d
@@ -12196,6 +12192,7 @@ _FS_REENTRANT	Utilities/Third_Party/fat_fs/inc/ffconf.h	155;"	d
 _FS_RPATH	Utilities/Third_Party/fat_fs/inc/ffconf.h	108;"	d
 _FS_TIMEOUT	Utilities/Third_Party/fat_fs/inc/ffconf.h	156;"	d
 _FS_TINY	Utilities/Third_Party/fat_fs/inc/ffconf.h	17;"	d
+_GPIO_H_	AP_HAL_STM32F4/GPIO.h	2;"	d
 _HCD	Libraries/STM32_USB_OTG_Driver/inc/usb_core.h	/^typedef struct _HCD$/;"	s
 _HIDDescriptor	Libraries/STM32_USB_HOST_Library/Core/inc/usbh_def.h	/^typedef struct _HIDDescriptor$/;"	s
 _HID_MOUSE_Data	Libraries/STM32_USB_HOST_Library/Class/HID/inc/usbh_hid_mouse.h	/^typedef struct _HID_MOUSE_Data$/;"	s
@@ -12301,6 +12298,7 @@ _USE_IOCTL	Utilities/Third_Party/fat_fs/inc/diskio.h	8;"	d
 _USE_LFN	Utilities/Third_Party/fat_fs/inc/ffconf.h	89;"	d
 _USE_MKFS	Utilities/Third_Party/fat_fs/inc/ffconf.h	43;"	d
 _USE_STRFUNC	Utilities/Third_Party/fat_fs/inc/ffconf.h	39;"	d
+_VIRGPIO_H_	AP_HAL_STM32F4/virgpio.h	2;"	d
 _WORD_ACCESS	Utilities/Third_Party/fat_fs/inc/ffconf.h	142;"	d
 __ALIGN_BEGIN	Libraries/STM32_USB_OTG_Driver/inc/usb_conf_template.h	214;"	d
 __ALIGN_BEGIN	Libraries/STM32_USB_OTG_Driver/inc/usb_conf_template.h	218;"	d
@@ -12351,14 +12349,7 @@ __ALIGN_END	Libraries/STM32_USB_HOST_Library/Class/MSC/src/usbh_msc_scsi.c	/^__A
 __ALIGN_END	Libraries/STM32_USB_OTG_Driver/inc/usb_conf_template.h	213;"	d
 __ALIGN_END	Libraries/STM32_USB_OTG_Driver/inc/usb_conf_template.h	216;"	d
 __ALIGN_END	Libraries/STM32_USB_OTG_Driver/inc/usb_conf_template.h	227;"	d
-__AP_HAL_GPIO_H__	AP_HAL/GPIO.h	3;"	d
-__AP_HAL_HAL_H__	AP_HAL/HAL.h	3;"	d
-__AP_HAL_H__	AP_HAL/AP_HAL.h	3;"	d
-__AP_HAL_NAMESPACE_H__	AP_HAL/AP_HAL_Namespace.h	3;"	d
 __AP_HAL_STM32F4_CLASS_H__	AP_HAL_STM32F4/HAL_STM32F4_Class.h	2;"	d
-__AP_HAL_STM32F4_GPIO_H__	AP_HAL_STM32F4/GPIO.h	2;"	d
-__AP_HAL_STM32F4_H__	AP_HAL_STM32F4/AP_HAL_STM32F4.h	2;"	d
-__AP_HAL_STM32F4_NAMESPACE_H__	AP_HAL_STM32F4/AP_HAL_STM32F4_Namespace.h	2;"	d
 __ASM	Libraries/CMSIS/Include/core_cm0.h	83;"	d
 __ASM	Libraries/CMSIS/Include/core_cm0.h	87;"	d
 __ASM	Libraries/CMSIS/Include/core_cm0.h	91;"	d
@@ -13145,11 +13136,12 @@ _exit	src/syscalls.c	/^void _exit(int status)$/;"	f
 _fork	src/syscalls.c	/^int _fork()$/;"	f
 _fstat	src/syscalls.c	/^int _fstat(int file, struct stat *st)$/;"	f
 _getpid	src/syscalls.c	/^int _getpid()$/;"	f
+_gpio_driver	AP_HAL_STM32F4/HAL_STM32F4_Class.h	/^	STM32F4GPIO *_gpio_driver;$/;"	m	class:HAL_STM32F4
 _isatty	src/syscalls.c	/^int _isatty(int file)$/;"	f
 _kill	src/syscalls.c	/^int _kill(int pid, int sig)$/;"	f
 _link	src/syscalls.c	/^int _link(char *old, char *new)$/;"	f
 _lseek	src/syscalls.c	/^int _lseek(int file, int ptr, int dir)$/;"	f
-_pin_num	AP_HAL_STM32F4/GPIO.h	/^    uint8_t _pin_num;$/;"	m	class:AP_HAL_STM32F4_NS::STM32F4DigitalSource
+_pin_num	AP_HAL_STM32F4/GPIO.h	/^    uint8_t _pin_num;$/;"	m	class:STM32F4DigitalSource
 _pin_num	inc/digiio.h	/^    uint8_t _pin_num;$/;"	m	class:DigitalSource
 _read	src/syscalls.c	/^int _read(int file, char *ptr, int len)$/;"	f
 _reserved0	Libraries/CMSIS/Include/core_cm0.h	/^    uint32_t _reserved0:15;              \/*!< bit:  9..23  Reserved                           *\/$/;"	m	struct:__anon57::__anon58
@@ -13686,7 +13678,7 @@ cdir	Utilities/Third_Party/fat_fs/inc/ff.h	/^	DWORD	cdir;		\/* Current directory
 cfg	Libraries/STM32_USB_OTG_Driver/inc/usb_core.h	/^  USB_OTG_CORE_CFGS    cfg;$/;"	m	struct:USB_OTG_handle
 cgnpinnak	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t cgnpinnak :$/;"	m	struct:_USB_OTG_DCTL_TypeDef::__anon222
 cgoutnak	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t cgoutnak :$/;"	m	struct:_USB_OTG_DCTL_TypeDef::__anon222
-channel	AP_HAL_STM32F4/GPIO.cpp	/^AP_HAL::DigitalSource* STM32F4GPIO::channel(uint16_t n) {$/;"	f	class:STM32F4GPIO
+channel	AP_HAL_STM32F4/GPIO.cpp	/^STM32F4DigitalSource* STM32F4GPIO::channel(uint16_t n) {$/;"	f	class:STM32F4GPIO
 channel	Libraries/STM32_USB_OTG_Driver/inc/usb_core.h	/^  uint16_t                 channel [USB_OTG_MAX_TX_FIFOS];$/;"	m	struct:_HCD
 chdis	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t chdis :$/;"	m	struct:_USB_OTG_HCCHAR_TypeDef::__anon238
 check_fs	Utilities/Third_Party/fat_fs/src/ff.c	/^BYTE check_fs (	\/* 0:The FAT boot record, 1:Valid boot record but not an FAT, 2:Not a boot record, 3:Error *\/$/;"	f	file:
@@ -13984,11 +13976,10 @@ gnpinnaksts	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t gnpinnaksts
 goutnakeff	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t goutnakeff :$/;"	m	struct:_USB_OTG_GINTMSK_TypeDef::__anon212
 goutnakeff	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t goutnakeff :$/;"	m	struct:_USB_OTG_GINTSTS_TypeDef::__anon213
 goutnaksts	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t goutnaksts :$/;"	m	struct:_USB_OTG_DCTL_TypeDef::__anon222
-gpio	AP_HAL/HAL.h	/^    AP_HAL::GPIO*       gpio;$/;"	m	class:AP_HAL::HAL
 gpioDriver	AP_HAL_STM32F4/HAL_STM32F4_Class.cpp	/^static STM32F4GPIO gpioDriver;$/;"	v	file:
 gpio_group	inc/bspgpio.h	/^	GPIO_TypeDef * gpio_group;$/;"	m	struct:pin_info_s
 gpio_rcc	inc/bspgpio.h	/^	uint32_t gpio_rcc;$/;"	m	struct:pin_info_s
-hal	src/main.cpp	/^const AP_HAL::HAL& hal = ;$/;"	v
+hal	src/main.cpp	/^const HAL_STM32F4& hal = AP_HAL_STM32F4;$/;"	v
 hburstlen	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t hburstlen :$/;"	m	struct:_USB_OTG_GAHBCFG_TypeDef::__anon209
 hc	Libraries/STM32_USB_OTG_Driver/inc/usb_core.h	/^  USB_OTG_HC               hc [USB_OTG_MAX_TX_FIFOS];$/;"	m	struct:_HCD
 hc_num_in	Libraries/STM32_USB_HOST_Library/Class/HID/inc/usbh_hid_core.h	/^  uint8_t              hc_num_in; $/;"	m	struct:_HID_Process
@@ -14044,7 +14035,7 @@ inepint	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t inepint:$/;"	m	
 inepintr	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t inepintr :$/;"	m	struct:_USB_OTG_GINTMSK_TypeDef::__anon212
 inepnakeff	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t inepnakeff :$/;"	m	struct:_USB_OTG_DIEPINTn_TypeDef::__anon224
 init	AP_HAL_STM32F4/GPIO.cpp	/^void STM32F4GPIO::init()$/;"	f	class:STM32F4GPIO
-init	AP_HAL_STM32F4/HAL_STM32F4_Class.cpp	/^void HAL_STM32F4::init(int argc,char* const argv[]) const {$/;"	f	class:HAL_STM32F4
+init	AP_HAL_STM32F4/HAL_STM32F4_Class.cpp	/^void HAL_STM32F4::init(int argc,char* const argv[]) const $/;"	f	class:HAL_STM32F4
 inputQ31	Libraries/CMSIS/DSP_Lib/Examples/arm_graphic_equalizer_example/arm_graphic_equalizer_example_q31.c	/^q31_t inputQ31[BLOCKSIZE];   $/;"	v
 intimerrx	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t intimerrx :$/;"	m	struct:_USB_OTG_GINTSTS_TypeDef::__anon213
 intknepmis	Libraries/STM32_USB_OTG_Driver/inc/usb_regs.h	/^uint32_t intknepmis :$/;"	m	struct:_USB_OTG_DIEPINTn_TypeDef::__anon224

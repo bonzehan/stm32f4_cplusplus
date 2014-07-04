@@ -1,5 +1,6 @@
 #include "stm32f4bsp.h"
 #include "stm32f4xx.h"
+#include <stdio.h>
 
 static volatile uint32_t tempISER[8]={0};
 
@@ -36,4 +37,12 @@ void Stm32f4BspReboot(void)
 		IWDG_ReloadCounter();
 		IWDG_Enable();
 }
+
+//re-write fputc function
+/*
+int fputc(int ch, FILE *f)
+{
+		return ITM_SendChar(ch);
+}
+*/
 
