@@ -1,8 +1,10 @@
 #include "GPIO.h"
 #include "stm32f4bsp.h"
+#include <stdio.h>
 
 STM32F4GPIO::STM32F4GPIO()
 {
+	printf("GPIO constructor called\n");
 }
 
 void STM32F4GPIO::init()

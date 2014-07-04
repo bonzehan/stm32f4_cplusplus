@@ -1,0 +1,3 @@
+140704
+--------------------
+bug found. startup code doesn't support global class initiating before main

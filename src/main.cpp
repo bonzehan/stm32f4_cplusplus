@@ -1,24 +1,3 @@
-/**
- ******************************************************************************
- * @file    IO_Toggle/main.c 
- * @author  MCD Application Team
- * @version V1.0.0
- * @date    19-September-2011
- * @brief   Main program body
- ******************************************************************************
- * @attention
- *
- * THE PRESENT FIRMWARE WHICH IS FOR GUIDANCE ONLY AIMS AT PROVIDING CUSTOMERS
- * WITH CODING INFORMATION REGARDING THEIR PRODUCTS IN ORDER FOR THEM TO SAVE
- * TIME. AS A RESULT, STMICROELECTRONICS SHALL NOT BE HELD LIABLE FOR ANY
- * DIRECT, INDIRECT OR CONSEQUENTIAL DAMAGES WITH RESPECT TO ANY CLAIMS ARISING
- * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
- * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
- *
- * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
- ******************************************************************************  
- */ 
-
 /* Includes ------------------------------------------------------------------*/
 #include "HAL_STM32F4_Class.h"
 #include "GPIO.h"
@@ -26,16 +5,9 @@
 #include "stm32f4bsp.h"
 #include <stdio.h>
 
-/** @addtogroup STM32F4_Discovery_Peripheral_Examples
- * @{
- */
-
-/** @addtogroup IO_Toggle
- * @{
- */ 
-
 uint32_t delay_cnt = 200;
 //STM32F4GPIO& hal = g_STM32F4GPIO;
+//const HAL_STM32F4& hal = AP_HAL_STM32F4;
 /* Private function prototypes -----------------------------------------------*/
 void Delay(__IO uint32_t nCount);
 void ChangeDelay(void);
@@ -48,10 +20,12 @@ void ChangeDelay(void);
  */
 int main(void)
 {
+		printf("run in main\n");
+		HAL_STM32F4 local_hal;
+		STM32F4GPIO gpio_driver;
 		//gpio_driver.pinMode(0,1);
 //		STM32F4GPIO loc_io;
 //		HAL_STM32F4 hal;
-		STM32F4GPIO gpio_driver;
 //		int a=100;
 		/*!< At this stage the microcontroller clock setting is already configured, 
 		  this is done through SystemInit() function which is called from startup
@@ -59,6 +33,7 @@ int main(void)
 		  To reconfigure the default setting of SystemInit() function, refer to
 		  system_stm32f4xx.c file
 		 */
+		local_hal.init();
 		Stm32f4BspInit();
 		systickConfig();
 //		loc_io.pinMode(0,1);
@@ -82,7 +57,7 @@ int main(void)
 		while (1)
 		{
 		//		ITM_SendChar(0x42);
-		//		printf("the final answer is %d\n",42);
+				printf("the final answer is %d\n",42);
 				/* PD12 to be toggled */
 //				hal.p_gpio_driver->write(0,1);
 //				loc_io.write(0,1);

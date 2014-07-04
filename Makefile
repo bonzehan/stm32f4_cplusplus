@@ -72,7 +72,8 @@ CXXFLAGS = $(CFLAGS) \
 		   -fno-exceptions \
 		   -std=c++11
 
-ASFLAGS = $(CFLAGS)
+ASFLAGS = $(CFLAGS) \
+		  -x assembler-with-cpp
 
 LDLIBS=
 
