@@ -4,7 +4,6 @@
 
 STM32F4GPIO::STM32F4GPIO()
 {
-	printf("GPIO constructor called\n");
 }
 
 void STM32F4GPIO::init()

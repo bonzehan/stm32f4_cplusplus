@@ -9,11 +9,9 @@ public:
     void init(void);
 
 	STM32F4GPIO* p_gpio_driver;
-	int a;
-	int b;
 };
 
-//extern const HAL_STM32F4 AP_HAL_STM32F4;
+extern const HAL_STM32F4 AP_HAL_STM32F4;
 
 #endif // _HAL_STM32F4_CLASS_H__
 

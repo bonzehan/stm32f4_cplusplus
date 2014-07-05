@@ -6,7 +6,7 @@ OPTLVL:=0 # Optimization level, can be [0, 1, 2, 3, s].
 PROJECT_NAME:=$(notdir $(lastword $(CURDIR)))
 STMLIB:=$(CURDIR)/Libraries
 STD_PERIPH:=$(STMLIB)/STM32F4xx_StdPeriph_Driver
-STARTUP:=$(STMLIB)/CMSIS/ST/STM32F4xx/Source/Templates/gcc_ride7
+STARTUP:=$(CURDIR)/Startup
 LINKER_SCRIPT=$(CURDIR)/stm32_flash.ld
 OBJDIR := $(CURDIR)/Object
 
@@ -15,12 +15,14 @@ INCLUDE+=-I$(STMLIB)/CMSIS/Include
 INCLUDE+=-I$(STMLIB)/CMSIS/ST/STM32F4xx/Include
 INCLUDE+=-I$(STD_PERIPH)/inc
 INCLUDE += -I$(CURDIR)/AP_HAL_STM32F4
+#INCLUDE += -I$(STARTUP)
 
 # vpath is used so object files are written to the current directory instead
 # of the same directory as their source files
-vpath %.c $(CURDIR)/src $(STD_PERIPH)/src
+vpath %.c $(CURDIR)/src $(STD_PERIPH)/src $(STARTUP)
 vpath %.cpp $(CURDIR)/src
 vpath %.cpp $(CURDIR)/AP_HAL_STM32F4
+vpath %.S $(STARTUP)
 vpath %.s $(STARTUP)
 
 ASRC=startup_stm32f4xx.s
@@ -39,7 +41,8 @@ CSRC+=stm32f4xx_rcc.c \
 		stm32f4xx_exti.c \
 		stm32f4xx_syscfg.c \
 		stm32f4xx_iwdg.c \
-		syscalls.c
+		syscalls.c \
+		vectors.c
 
 CXXSRC = LibraryHacks.cpp
 CXXSRC += main.cpp
@@ -48,9 +51,12 @@ CXXSRC += HAL_STM32F4_Class.cpp
 
 ARCHFLAGS = -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard 
 
-WARNFLAGS = -Wall -Werror
+WARNFLAGS = -Wall -Wextra
 
-OPTFLAGS = -O$(OPTLVL) -ggdb3
+OPTFLAGS = -O$(OPTLVL) -g \
+		   -ggdb3 \
+		   -ffunction-sections \
+		   -fdata-sections
 
 CDEFS=-DSTM32F4XX
 CDEFS+=-DUSE_STDPERIPH_DRIVER
@@ -63,21 +69,33 @@ CFLAGS=$(ARCHFLAGS) \
 	   $(OPTFLAGS) \
 	   $(CDEFS) \
 	   $(WARNFLAGS) \
+	   -Wstrict-prototypes \
 	   -flto \
-	   -ffunction-sections \
-	   -fdata-sections
+	   -std=gnu89 \
+	   -fverbose-asm
 
-CXXFLAGS = $(CFLAGS) \
+CXXFLAGS = $(ARCHFLAGS) \
+		   $(INCLUDE) \
+		   $(OPTFLAGS) \
+		   $(WARNFLAGS) \
+		   $(CDEFS) \
 		   -fno-rtti \
 		   -fno-exceptions \
-		   -std=c++11
+		   -fverbose-asm \
+		   -std=gnu++98
 
-ASFLAGS = $(CFLAGS) \
+ASFLAGS = $(ARCHFLAGS) \
+		  $(CDEFS) \
+		  $(INCLUDE) \
+		  -g -ggdb3 \
+		  -DUSES_CXX \
 		  -x assembler-with-cpp
 
 LDLIBS=
 
+# -Wl,--gc-sections remove unused code
 LDFLAGS=$(ARCHFLAGS) \
+		-g \
         -Wl,--gc-sections,-T$(LINKER_SCRIPT)
 
 #####
@@ -89,7 +107,7 @@ DEPS = $(OBJS:.o=.d)
 
 CC=$(TOOLCHAIN_PATH)/$(TOOLCHAIN_PREFIX)-gcc
 CXX = $(TOOLCHAIN_PATH)/$(TOOLCHAIN_PREFIX)-g++
-LD=$(TOOLCHAIN_PATH)/$(TOOLCHAIN_PREFIX)-gcc
+LD=$(TOOLCHAIN_PATH)/$(TOOLCHAIN_PREFIX)-g++
 OBJCOPY=$(TOOLCHAIN_PATH)/$(TOOLCHAIN_PREFIX)-objcopy
 AS=$(TOOLCHAIN_PATH)/$(TOOLCHAIN_PREFIX)-gcc
 AR=$(TOOLCHAIN_PATH)/$(TOOLCHAIN_PREFIX)-ar
@@ -97,8 +115,11 @@ GDB=$(TOOLCHAIN_PATH)/$(TOOLCHAIN_PREFIX)-gdb
 
 -include $(DEPS)
 
-#all:$(OBJDIR)/testclass.o
-#	@echo $<
+#all:
+#	@echo $(CFLAGS)
+#		@echo $(CXXFLAGS)
+#		@echo $(ASFLAGS)
+#		@echo $(LDFLAGS)
 
 all: $(OBJ) 
 	$(LD) -o $(TARGET).elf $(LDFLAGS) $(OBJ)	$(LDLIBS)

@@ -1,13 +1,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "HAL_STM32F4_Class.h"
-#include "GPIO.h"
 #include "stm32f4xx.h"
 #include "stm32f4bsp.h"
 #include <stdio.h>
 
 uint32_t delay_cnt = 200;
 //STM32F4GPIO& hal = g_STM32F4GPIO;
-//const HAL_STM32F4& hal = AP_HAL_STM32F4;
+const HAL_STM32F4& hal = AP_HAL_STM32F4;
 /* Private function prototypes -----------------------------------------------*/
 void Delay(__IO uint32_t nCount);
 void ChangeDelay(void);
@@ -21,8 +20,6 @@ void ChangeDelay(void);
 int main(void)
 {
 		printf("run in main\n");
-		HAL_STM32F4 local_hal;
-		STM32F4GPIO gpio_driver;
 		//gpio_driver.pinMode(0,1);
 //		STM32F4GPIO loc_io;
 //		HAL_STM32F4 hal;
@@ -33,18 +30,17 @@ int main(void)
 		  To reconfigure the default setting of SystemInit() function, refer to
 		  system_stm32f4xx.c file
 		 */
-		local_hal.init();
+//		hal.init();
 		Stm32f4BspInit();
 		systickConfig();
 //		loc_io.pinMode(0,1);
 //		g_STM32F4GPIO.pinMode(0,1);
 		//hal.pinMode(0,1);
 		//hal.init();
-//		hal.p_gpio_driver->pinMode(0,1);
-		gpio_driver.pinMode(0,1);
-		gpio_driver.pinMode(1,1);
-		gpio_driver.pinMode(2,1);
-		gpio_driver.pinMode(3,1);
+		hal.p_gpio_driver->pinMode(0,1);
+		hal.p_gpio_driver->pinMode(1,1);
+		hal.p_gpio_driver->pinMode(2,1);
+		hal.p_gpio_driver->pinMode(3,1);
 
 		bspPinMode(4, 0);
 		bspITAttach(4, EXTI_Trigger_Falling, Stm32f4BspReboot); 
@@ -59,39 +55,42 @@ int main(void)
 		//		ITM_SendChar(0x42);
 				printf("the final answer is %d\n",42);
 				/* PD12 to be toggled */
-//				hal.p_gpio_driver->write(0,1);
+				hal.p_gpio_driver->write(0,1);
 //				loc_io.write(0,1);
 //				g_STM32F4GPIO.write(0,1);
-				gpio_driver.write(0,1);
+//				gpio_driver.write(0,1);
 
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
 
 				/* PD13 to be toggled */
-				gpio_driver.write(1,1);
+				hal.p_gpio_driver->write(1,1);
 
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
 
 				/* PD14 to be toggled */
-				gpio_driver.write(2,1);
+				hal.p_gpio_driver->write(2,1);
 
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
 
 				/* PD15 to be toggled */
-				gpio_driver.write(3,1);
+				hal.p_gpio_driver->write(3,1);
 
 				/* Insert delay */
 				systickDelay_ms(delay_cnt);
 
-//				hal.p_gpio_driver->write(0,0);
+				hal.p_gpio_driver->write(0,0);
+				hal.p_gpio_driver->write(1,0);
+				hal.p_gpio_driver->write(2,0);
+				hal.p_gpio_driver->write(3,0);
 //				loc_io.write(0,0);
 //				g_STM32F4GPIO.write(0,0);
-				gpio_driver.write(0,0);
-				gpio_driver.write(1,0);
-				gpio_driver.write(2,0);
-				gpio_driver.write(3,0);
+//				gpio_driver.write(0,0);
+//				gpio_driver.write(1,0);
+//				gpio_driver.write(2,0);
+//				gpio_driver.write(3,0);
 
 				/* Insert delay */
 				systickDelay_ms(1000);
